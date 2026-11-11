@@ -3,7 +3,7 @@ name: "IPMItool server native"
 version: "2.7.8"
 slug: "ipmi-server-native"
 description: "IPMItool server native"
-url: "https://github.com/marc4s/home-assistant-addons"
+url: "https://github.com/marc4s/home-assistant-addon-ipmi-server-native"
 arch:
   - amd64
 
