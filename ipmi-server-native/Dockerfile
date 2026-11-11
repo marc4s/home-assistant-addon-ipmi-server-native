@@ -20,7 +20,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Build ipmitool from source without executing cross-compiled binaries during build
 # hadolint ignore=DL3003,DL3018
-RUN apk add --no-cache ipmitool=1.8.19-r0
+RUN apk add --no-cache ipmitool=1.8.19-r1
 
 # hadolint ignore=DL3018
 RUN apk add --no-cache \
