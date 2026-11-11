@@ -2,7 +2,7 @@
 ARG BUILD_FROM=ghcr.io/hassio-addons/base:21.0.11
 
 # 2. Define the composer stage
-FROM composer:2.8.5 AS composer_stage
+FROM composer:2.11.1 AS composer_stage
 
 # 3. Start the main build using the ARG (it is now globally available)
 # hadolint ignore=DL3006
@@ -25,15 +25,15 @@ RUN apk add --no-cache ipmitool=1.8.19-r1
 # hadolint ignore=DL3018
 RUN apk add --no-cache \
         nginx=1.26.2-r0 \
-        php84=8.4.2-r0 \
-        php84-fpm=8.4.2-r0 \
-        php84-openssl=8.4.2-r0 \
-        php84-ctype=8.4.2-r0 \
-        php84-session=8.4.2-r0 \
-        php84-tokenizer=8.4.2-r0 \
-        php84-opcache=8.4.2-r0 \
-        php84-iconv=8.4.2-r0 \
-        php84-xml=8.4.2-r0 && \
+        php84=8.4.27-r0 \
+        php84-fpm=8.4.27-r0 \
+        php84-openssl=8.4.27-r0 \
+        php84-ctype=8.4.27-r0 \
+        php84-session=8.4.27-r0 \
+        php84-tokenizer=8.4.27-r0 \
+        php84-opcache=8.4.27-r0 \
+        php84-iconv=8.4.27-r0 \
+        php84-xml=8.4.27-r0 && \
     mkdir -p /app/cache /app/var/cache/prod /app/var/log /var/tmp/nginx && \
     chmod -R 777 /app/var/
 
@@ -49,8 +49,8 @@ COPY --from=composer_stage /usr/bin/composer /usr/bin/composer
 # Install app dependencies and clean up
 # hadolint ignore=DL3018
 RUN apk add --no-cache \
-        php84-phar=8.4.2-r0 \
-        php84-mbstring=8.4.2-r0 && \
+        php84-phar=8.4.27-r0 \
+        php84-mbstring=8.4.27-r0 && \
     php84 /usr/bin/composer --working-dir /app install && \
     rm -rf /app/var/cache/* && \
     apk del \
