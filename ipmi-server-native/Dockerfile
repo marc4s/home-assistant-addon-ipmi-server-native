@@ -20,20 +20,20 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Build ipmitool from source without executing cross-compiled binaries during build
 # hadolint ignore=DL3003,DL3018
-RUN apk add --no-cache ipmitool
+RUN apk add --no-cache ipmitool=1.8.19-r0
 
 # hadolint ignore=DL3018
 RUN apk add --no-cache \
-        nginx \
-        php84 \
-        php84-fpm \
-        php84-openssl \
-        php84-ctype \
-        php84-session \
-        php84-tokenizer \
-        php84-opcache \
-        php84-iconv \
-        php84-xml && \
+        nginx=1.26.2-r0 \
+        php84=8.4.2-r0 \
+        php84-fpm=8.4.2-r0 \
+        php84-openssl=8.4.2-r0 \
+        php84-ctype=8.4.2-r0 \
+        php84-session=8.4.2-r0 \
+        php84-tokenizer=8.4.2-r0 \
+        php84-opcache=8.4.2-r0 \
+        php84-iconv=8.4.2-r0 \
+        php84-xml=8.4.2-r0 && \
     mkdir -p /app/cache /app/var/cache/prod /app/var/log /var/tmp/nginx && \
     chmod -R 777 /app/var/
 
@@ -49,8 +49,8 @@ COPY --from=composer_stage /usr/bin/composer /usr/bin/composer
 # Install app dependencies and clean up
 # hadolint ignore=DL3018
 RUN apk add --no-cache \
-        php84-phar \
-        php84-mbstring && \
+        php84-phar=8.4.2-r0 \
+        php84-mbstring=8.4.2-r0 && \
     php84 /usr/bin/composer --working-dir /app install && \
     rm -rf /app/var/cache/* && \
     apk del \
